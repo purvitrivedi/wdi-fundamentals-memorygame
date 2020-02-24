@@ -21,41 +21,62 @@ const cards = [
 	cardImage: "images/king-of-diamonds.png"
 }
 ];
-
 const cardsInPlay = [];
+let gameBoard = document.getElementById('game-board');
 
-function checkForMatch() {
-	if(cardsInPlay[0] === cardsInPlay[1]){
-		alert("You found a match!");
+function createBoard() {
+	for (let i = 0; i < cards.length; i++) {
+			let cardElement = document.createElement('img'); //creates a new img element
+			cardElement.setAttribute('src', "images/back.png"); // assings src of img back
+			cardElement.setAttribute('data-id', i); // sets the array data-id
+			cardElement.addEventListener('click', flipCard); //runs flipCard
+			gameBoard.appendChild(cardElement); //adds to div element
+			console.log(i);
+
+			let resetButton = document.getElementsByTagName('button')[0];
+			resetButton.addEventListener('click', function() {
+				cardElement.setAttribute('src', "images/back.png");
+				cardsInPlay.length = 0;
+			});
 	}
-	else {
-		alert("Sorry! Try again!");
-	}
+
+	
 }
 
 function flipCard() {
 	let cardId = this.getAttribute('data-id');
-	console.log("User flipped "+ cards[cardId].rank);
 	cardsInPlay.push(cards[cardId].rank);
-	console.log(cards[cardId].suit);
-	console.log(cards[cardId].cardImage);
 	this.setAttribute('src',cards[cardId].cardImage);
 	if(cardsInPlay.length === 2){
 	checkForMatch();
 }
-}
 
-function createBoard() {
-	for (let i = 0; i < cards.length; i++) {
-		let cardElement = document.createElement('img');
-		cardElement.setAttribute('src', "images/back.png");
-		cardElement.setAttribute('data-id', i);
-		cardElement.addEventListener('click', flipCard);
-		document.getElementById('game-board').appendChild(cardElement);
+}
+const score = document.createElement('p');
+let gamesWon = 0;
+const message = document.createElement('p');
+
+function checkForMatch() {
+	if(cardsInPlay[0] === cardsInPlay[1]){
+		message.textContent = "You found a match!";
+		gameBoard.appendChild(message);
+		gamesWon += 1;
+		score.textContent = "Points Won: " + gamesWon;
+		gameBoard.appendChild(score);
+
+	}
+	else {
+		message.textContent = "Sorry! Try again";
+		gameBoard.appendChild(message);
 	}
 }
 
 createBoard();
+
+//fix double click on the same card
+//randomise cards
+//adds a new card everytime user wins
+
 
 
 

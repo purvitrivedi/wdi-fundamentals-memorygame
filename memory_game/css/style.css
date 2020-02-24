@@ -93,7 +93,19 @@ height: 0;
 font-size: 0;
 }
 
+
 .name {
 	color: #F15B31;
 	font-weight: 700;
+}
+
+button {
+	margin-top: 15px;
+	font-size: 15px;
+	padding: 10px;
+	background-color: #F15B31;
+	font-family: Raleway;
+	color: #FFFFFF;
+	font-weight: 800;
+	letter-spacing: .2em;
 }
