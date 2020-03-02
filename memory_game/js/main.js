@@ -45,7 +45,6 @@ function createBoard() {
 			});
 	}
 }
-
 	
 }
 
@@ -53,9 +52,10 @@ const cardsInPlay = [];
 
 function flipCard() {
 	let cardId = this.getAttribute('data-id');
-	cardsInPlay.push(cards[cardId].suit);
+	cardsInPlay.push(cards[cardId].suit, cards[cardId].rank);
 	this.setAttribute('src',cards[cardId].cardImage);
-	if(cardsInPlay.length === 2){
+	if(cardsInPlay.length === 4){
+		console.log(cardsInPlay);
 	checkForMatch();
 }
 
@@ -65,7 +65,7 @@ let gamesWon = 0;
 const message = document.createElement('p');
 
 function checkForMatch() {
-	if(cardsInPlay[0] === cardsInPlay[1]){
+	if(cardsInPlay[0] === cardsInPlay[2] && cardsInPlay[1] === cardsInPlay[3] ){
 		message.textContent = "You found a match!";
 		gameBoard.appendChild(message);
 		gamesWon += 1;
@@ -84,6 +84,8 @@ createBoard();
 
 //Make message appear before score
 //fix double click on the same card
+//automatically resets after 2 are selected
+//randomise how cards load up
 
 
 
