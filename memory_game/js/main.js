@@ -22,19 +22,22 @@ const cards = [
 }
 ];
 
+cards.sort(() => Math.random() - 0.5);
+
 let gameBoard = document.getElementById('game-board');
 let j = 0;
 
 function createBoard() {
-	while (j < 2){
+	while (j < 2){ 												//executes loop twice
 	for (let i = 0; i < cards.length; i++) {
-			let cardElement = document.createElement('img'); //creates a new img element
-			cardElement.setAttribute('src', "images/back.png"); // assings src of img back
-			cardElement.setAttribute('data-id', i); // sets the array data-id
-			gameBoard.appendChild(cardElement); //adds to div element
-			cardElement.addEventListener('click', flipCard); //runs flipCard
-			if(i === 3){
+			let cardElement = document.createElement('img'); 	//creates a new img element
+			cardElement.setAttribute('src', "images/back.png"); // assigns src of img back
+			cardElement.setAttribute('data-id', i); 			// sets the array data-id
+			gameBoard.appendChild(cardElement); 				//adds to div element
+			cardElement.addEventListener('click', flipCard); 	//runs flipCard
+			if(i === 3){										
 				j++;
+
 			}
 		
 
@@ -42,6 +45,7 @@ function createBoard() {
 			resetButton.addEventListener('click', function() {
 				cardElement.setAttribute('src', "images/back.png");
 				cardsInPlay.length = 0;
+				cards.sort(() => Math.random() - 0.5);
 			});
 	}
 }
@@ -55,29 +59,29 @@ function flipCard() {
 	cardsInPlay.push(cards[cardId].suit, cards[cardId].rank);
 	this.setAttribute('src',cards[cardId].cardImage);
 	if(cardsInPlay.length === 4){
-		console.log(cardsInPlay);
 	checkForMatch();
 }
 
 }
-const score = document.createElement('p');
+const score = document.createElement('div');
+score.setAttribute("class","score");
 let gamesWon = 0;
 const message = document.createElement('p');
 
 function checkForMatch() {
 	if(cardsInPlay[0] === cardsInPlay[2] && cardsInPlay[1] === cardsInPlay[3] ){
-		message.textContent = "You found a match!";
+		message.textContent = "Well done! You found a match.";
 		gameBoard.appendChild(message);
 		gamesWon += 1;
 		score.textContent = "Points Won: " + gamesWon;
-		gameBoard.appendChild(score);
-
+		gameBoard.prepend(score);
 	}
 	else {
-		message.textContent = "Sorry! Try again";
+		message.textContent = "Not a match! Hit 'Reset' to play again";
 		gameBoard.appendChild(message);
 	}
 }
+
 
 createBoard();
 

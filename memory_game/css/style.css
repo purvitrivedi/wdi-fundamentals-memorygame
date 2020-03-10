@@ -66,6 +66,10 @@ img {
 	margin: 40px 8px 0px 8px;
 }
 
+img:hover {
+	transform: scale(1.03);
+}
+
 footer {
 	text-transform: uppercase;
 	background-color: #0D2C40;
@@ -107,5 +111,15 @@ button {
 	font-family: Raleway;
 	color: #FFFFFF;
 	font-weight: 800;
-	letter-spacing: .2em;
+	letter-spacing: .1em;
+}
+
+.score {
+	font-family: Raleway;
+	color: #F15B31;
+	letter-spacing: 1px;
+	font-weight: 600;
+	font-size: 15px;
+	margin-bottom: -10px;
+
 }
